@@ -43,13 +43,12 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ], [
-            'name.required' => 'Nome richiesto',
             'email.required' => 'Email richiesta',
             'password.required' => 'Password richiesta',
         ]);
         
         //Check email
-        $user = User::where('email', $credentials['email'])->first();
+        $user = User::where('email', $credentials['email'])->select('id','name','email','password')->first();
 
         //Check password
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
@@ -68,14 +67,10 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function showLoginForm() {
-        echo 'login';
-    }
-
     public function logout() {
         Auth::user()->tokens()->delete();
 
-        return response()->json(['message' => 'Logout effettuato con successo']);
+        return response(201);
 
     }
 }

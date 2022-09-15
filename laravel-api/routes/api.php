@@ -25,7 +25,6 @@ Route::get('/products/featured', [ProductController::class, 'featured'])->name('
 // Register and Login
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
 
 // Private Routes

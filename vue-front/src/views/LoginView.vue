@@ -21,10 +21,16 @@
               <div class="form-control mt-6">
                 <button type="submit" class="btn btn-primary">Accedi</button>
               </div>
-              <div v-if="errorMessage" class="alert alert-error shadow-lg py-3 mt-4">
+              <div v-if="$store.state.status == 'failed'" class="alert alert-error shadow-lg py-3 mt-4">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>{{errorMessage}}</span>
+                  <span>Email o password non valide</span>
+                </div>
+              </div>
+              <div v-else-if="$store.state.status == 'inProgress'" class="alert alert-info shadow-lg py-3 mt-4">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Accesso in corso...</span>
                 </div>
               </div>
               <div>
@@ -39,7 +45,7 @@
 <script>
 import CustomInput from '@/components/CustomInput.vue';
 // Custom input attributes: type, label, name, placeholder
-import service from '@/services/MainService.js'
+//import service from '@/services/MainService.js'
 export default {
   name: 'LoginView',
   components: {
@@ -47,19 +53,13 @@ export default {
   },
  
   methods: {
-    login() {
-      service.loginRequest(this.form) 
-        .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("username", response.data.user.name);
-          this.$router.push({ name: "home" });
-        })
-        .catch((error) => {
-          if(error.response) {
-          this.errorMessage = error.response.data.message;
-        }
-        });
-    },
+    login: function () {
+    let email = this.form.email 
+    let password = this.form.password
+    this.$store.dispatch('login', { email, password })
+      .then(() => this.$router.push('/'))
+      .catch(err => console.log(err))
+}
   },
   data() {
     return {
@@ -67,7 +67,7 @@ export default {
         email: '',
         password: ''
       },
-      errorMessage: '',
+      errorMessage: this.$store.state.status,
     }
   },
   }

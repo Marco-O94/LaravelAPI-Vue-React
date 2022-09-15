@@ -22,7 +22,7 @@
       <router-link to="login" class="btn btn-ghost btn-circle">
         <i class="fa-solid fa-user"></i>
       </router-link>
-      <button @click="logout" class="btn btn-ghost btn-circle">
+      <button v-if="$store.getters.isLoggedIn" @click="logout()" class="btn btn-ghost btn-circle">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
     </div>
@@ -39,7 +39,7 @@
     </div>
     <!-- OFFCanvas Body -->
     <div class="offcanvas-body flex-grow p-4 overflow-y-auto">
-      <ProfileBar :uname="username" v-if="username" />
+      <ProfileBar :uname="$store.state.user.name" v-if="$store.state.user.name" />
       <MainMenu  />
 
 
@@ -51,26 +51,18 @@
 <script>
 import ProfileBar from './ProfileBar.vue';
 import MainMenu from './MainMenu.vue';
-import service from '../services/MainService.js';
 export default {
   components: {
     MainMenu,
     ProfileBar
   },
-  props: {
-    username: {
-      type: String,
-      required: false,
-    },
-  },
   methods: {
-    logout() {
-      // delete localStorage
-      localStorage.removeItem('token');
-      localStorage.removeItem('username');
-      service.logoutRequest();
-      this.$router.push('/login');
-    },
-  },
+      logout() {
+      let response = this.$store.dispatch("logout");
+      if (response.status === 200) {
+        this.$router.push({ name: "login" });
+      }
+  }
+}
 }
 </script>
