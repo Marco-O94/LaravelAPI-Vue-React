@@ -1,15 +1,40 @@
 <template>
     <div class="container px-0">
-    <swiper :autoplay="{
+    <swiper 
+    :spaceBetween="30"
+    :loop="true"
+    :pagination="{
+      clickable: true,
+    }"
+    :autoplay="{
         delay: 2500,
         disableOnInteraction: true,
-    }" :speed="2500" :loop="true" :pagination="{
-    clickable: true,
-    }" :modules="modules" :slides-per-view="3"
-    :space-between="50">
+    }" :speed="2500"
+     :modules="modules"
+    :breakpoints="{
+        320: {
+            slidesPerView: 1,       
+        },
+        480: {
+            slidesPerView: 1,
+        },
+        640: {
+            slidesPerView: 1,
+        },
+        780: {
+            slidesPerView: 1,
+        },
+        1024: {
+            slidesPerView: 2,
+        },
+        1280: {
+            slidesPerView: 3,
+        },
+    }"
+    >
         <!-- SLIDER PAGINE -->
         <template v-for="(product, index) in featuredProducts" :key="index">
-            <swiper-slide class="py-[100px]">
+            <swiper-slide class="py-[100px] grid place-items-center">
                     <div class="card w-96 bg-base-100 shadow-xl">
                         <figure><img :src="product.image" alt="" /></figure>
                         <div class="card-body">
