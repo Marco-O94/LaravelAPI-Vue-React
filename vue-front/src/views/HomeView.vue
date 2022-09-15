@@ -1,8 +1,7 @@
 <template>
   
   <HeroSection/>
-  
-    <ProductsCarousel/>
+    <ProductsCarousel class="mb-[100px]"/>
 </template>
 
 <script>
