@@ -8,29 +8,44 @@
           </div>
           <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div class="card-body">
+              <form @submit.prevent="login(form)">
               <div class="form-control">
-              <EmailInput />
+              <CustomInput v-model="form.email" type="email" label="Email" name="email" placeholder="Inserisci la tua email"  />
             </div>
               <div class="form-control grid">
-              <PasswordInput />
+              <CustomInput v-model="form.password" type="password" label="Password" name="password" placeholder="Inserisci la tua password"  />
                   <a href="#" class="label-text-alt link link-hover justify-self-start mt-2">Password dimenticata?</a>
               </div>
               <div class="form-control mt-6">
-                <button class="btn btn-primary">Accedi</button>
+                <button type="submit" class="btn btn-primary">Accedi</button>
               </div>
+            </form>
             </div>
           </div>
         </div>
       </div>
 </template>
 <script>
-import EmailInput from '@/components/EmailInput.vue';
-import PasswordInput from '@/components/PasswordInput.vue';
+import CustomInput from '@/components/CustomInput.vue';
+// Custom input attributes: type, label, name, placeholder
+import MainService  from '@/services/MainService'
 export default {
   name: 'LoginView',
   components: {
-    EmailInput,
-    PasswordInput
+    CustomInput
   },
-};
+  methods: {
+    login(credentials) {
+      MainService.login(credentials)
+    }
+  },
+  data() {
+    return {
+      form: {
+        email: this.EmailInput,
+        password: this.PasswordInput
+      }
+    }
+  },
+  }
 </script>

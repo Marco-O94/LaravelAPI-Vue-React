@@ -10,7 +10,7 @@
       </button>
     </div>
     <div class="navbar-center">
-    <router-link to="/" class="btn btn-ghost normal-case text-xl">Laravel&Vue</router-link>
+    <router-link to="/" class="btn btn-ghost normal-case text-xl">Laravel & Vue</router-link>
     </div>
     <div class="navbar-end">
       <button class="btn btn-ghost btn-circle">
@@ -35,7 +35,7 @@
     class="offcanvas offcanvas-start fixed bottom-0 flex flex-col max-w-full bg-base-200 invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out top-0 left-0 border-none w-96"
     tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
     <div class="offcanvas-header flex items-center justify-between p-4">
-      <a href="https://github.com/Marco-O94" class="btn btn-ghost normal-case text-xl"><i class="fa-brands fa-github"></i> Marco-O94</a>
+      <a href="https://github.com/Marco-O94" class="btn btn-ghost normal-case text-xl"><i class="fa-brands fa-github mr-2"></i> Marco-O94</a>
       <button type="button"
         class="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-secondary border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-accent hover:opacity-75 hover:no-underline"
         data-bs-dismiss="offcanvas" aria-label="Close"></button>
