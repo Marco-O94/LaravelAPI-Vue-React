@@ -28,22 +28,27 @@ const apiClientPrivate = axios.create({
 }); */
 
 export default {
+    // Get All products
     getProducts() {
         return apiClient.get('/products');
     },
+
+    // Get product by id
     getProduct(id) {
         return apiClient.get('/product/' + id);
     },
+
+    // Get featured Products
     getFeaturedProducts() {
         return apiClient.get('/products/featured');
     },
-    //create login with token
-    login(credentials) {
-        return apiClient.post('/login', credentials).then((response) => {
-            localStorage.setItem("token", response.data.access_token);
-            return response;
-        }).catch((error) => {
-            console.log(error);
-        });
-}
+    //Login API
+    async loginRequest(credentials) {
+        return apiClient.post('/login', credentials);
+    },
+
+    //Register API
+    async logoutRequest() {
+        return apiClient.post('/logout');
+    },
 }
