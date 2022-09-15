@@ -1,12 +1,12 @@
 <template>
-    <!-- Non Collapse -->
+    <!-- Not Collapsible -->
     <li v-if="collapsible == false" class="relative">
         <router-link :to="link" class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-space text-ellipsis whitespace-nowrap rounded  hover:bg-primary-focus transition duration-300 ease-in-out">
           <i :class="fontAwesomeIcon" class="mr-5"></i>
           <span>{{label}}</span>
         </router-link>
       </li>
-<!-- Collapse -->
+<!-- Collapsible -->
       <li v-else class="relative" :id="label">
         <i :class="fontAwesomeIcon" class="mr-5"></i>
           <span>{{label}}</span>

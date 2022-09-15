@@ -64,7 +64,7 @@ export default createStore({
       })
     },
 
-    // LOGIN API (Fixing user data)
+    // LOGIN API (Fixed 16-09-2022)
     login ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
@@ -88,7 +88,7 @@ export default createStore({
       })
     },
 
-    // LOGOUT API (Fixed 16-09-2020)
+    // LOGOUT API (Fixed 16-09-2022)
     logout ({ commit }) {
       return new Promise((resolve) => { 
         axios({url: LOGOUT_URL, method: 'POST', headers: {authorization: localStorage.getItem('token')}});

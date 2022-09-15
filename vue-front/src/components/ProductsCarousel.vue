@@ -32,7 +32,7 @@
         },
     }"
     >
-        <!-- SLIDER PAGINE -->
+        <!-- CARDS SLIDER -->
         <template v-for="(product, index) in featuredProducts" :key="index">
             <swiper-slide class="py-[100px] grid place-items-center">
                     <div class="card w-96 bg-base-100 shadow-xl">
