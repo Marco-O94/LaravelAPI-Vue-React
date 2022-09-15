@@ -17,5 +17,26 @@ come React, tutti collegati al medesimo Laravel.
 
 ### Sulla cartella di Vue:
 - `npm install`
-- Nel file MainService.js in services cambiare il baseURL con l'url di Laravel
 - `npm run serve`
+
+### Altro
+La gestione della sessione avviene tramite Vuex, le rotte sono gestite da Vue router.\
+Su vue sto usando Option API, il Composition API lo utilizzerò nel prossimo progetto sempre collegato a questa repo. \
+Verranno in futuro inseriti anche React e Svelte.
+
+### Documentazione
+
+- [Vue Router](https://router.vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Vue](https://vuejs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+
+### RoadMap
+Aggiungere Commenti nel progetto Vue
+Configurazione [rotte private](https://router.vuejs.org/guide/advanced/navigation-guards.html#optional-third-argument-next)\
+
+`router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+  else next()
+})`
