@@ -22,7 +22,7 @@ come React, tutti collegati al medesimo Laravel.
 ### Altro
 La gestione della sessione avviene tramite Vuex, le rotte sono gestite da Vue router.\
 Su vue sto usando Option API, il Composition API lo utilizzerò nel prossimo progetto sempre collegato a questa repo. \
-Verranno in futuro inseriti anche React e Svelte.
+Verranno in futuro inseriti anche React e forse Svelte.
 
 ### Documentazione
 
