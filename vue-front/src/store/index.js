@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 //Public API
 const LOGIN_URL = 'http://localhost:8000/api/login';
@@ -8,10 +9,9 @@ const LOGOUT_URL = 'http://localhost:8000/api/logout';
 export default createStore({
   state: {
     status: '',
-    token: localStorage.getItem('token') || '',
-    user: {},
+    token:  Cookies.getItem('token') || '',
+    user: JSON.parse(Cookies.getItem('user')) || {},
   },
-
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status
@@ -21,10 +21,14 @@ export default createStore({
     auth_request (state) {
       state.status = 'inProgress'
     },
+
+    auth_user(state, user) {
+      state.user = user
+    },
     auth_success (state, token) {
       state.status = 'success'
       state.token = token
-      state.user = JSON.parse(localStorage.getItem('user'))
+      
     },
     auth_error (state) {
       state.status = 'failed'
@@ -38,7 +42,7 @@ export default createStore({
   },
   actions: {
     // REGISTER API
-    register ({ commit }, user) {
+    /*register ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios({
@@ -58,11 +62,11 @@ export default createStore({
           })
           .catch(err => {
             commit('auth_error', err)
-            localStorage.removeItem('token')
+            Cookies.remove('token')
             reject(err)
           })
       })
-    },
+    },*/
 
     // LOGIN API (Fixed 16-09-2022)
     login ({ commit }, user) {
@@ -72,17 +76,22 @@ export default createStore({
           url: LOGIN_URL, data: user, method: 'POST' })
           .then(resp => {
             const token = "Bearer " + resp.data.token;
-            const user = JSON.stringify(resp.data.user);
-            console.log(user);
-            localStorage.setItem('token', token)
-            localStorage.setItem('user', user)
+            const user = resp.data.user;
+            //Passo un oggetto nel caso in cui mi serva più di un valore da salvare da server
+            commit('auth_user', user, Object)
+            // Set Secure: true in cookies only when in production mode.
+            Cookies.setItem('token', token, { expires: 1 /* Days */, secure: false });
+            Cookies.setItem('user', JSON.stringify(user), { expires: 1 /* Days */, secure: false });
             axios.defaults.headers.common['authorization'] = token
-            commit('auth_success', token, user)
+            commit('auth_success', token)
+            
+            //Commit user to state as object
             resolve(resp)
           })
           .catch(err => {
             commit('auth_error')
-            localStorage.removeItem('token')
+            Cookies.removeItem('token')
+            Cookies.removeItem('user')
             reject(err)
           })
       })
@@ -91,9 +100,10 @@ export default createStore({
     // LOGOUT API (Fixed 16-09-2022)
     logout ({ commit }) {
       return new Promise((resolve) => { 
-        axios({url: LOGOUT_URL, method: 'POST', headers: {authorization: localStorage.getItem('token')}});
+        axios({url: LOGOUT_URL, method: 'POST', headers: {authorization: Cookies.getItem('token')}});
         commit('logout')
-        localStorage.removeItem('token')
+        Cookies.removeItem('token')
+        Cookies.removeItem('user')
         delete axios.defaults.headers.common['authorization']
         resolve()
       })

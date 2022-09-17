@@ -19,7 +19,7 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </button>
-      <router-link to="login" class="btn btn-ghost btn-circle">
+      <router-link to="Dashboard" class="btn btn-ghost btn-circle">
         <i class="fa-solid fa-user"></i>
       </router-link>
       <button v-if="$store.getters.isLoggedIn" @click="logout()" class="btn btn-ghost btn-circle">
@@ -58,10 +58,11 @@ export default {
   },
   methods: {
       logout() {
-      let response = this.$store.dispatch("logout");
-      if (response.status === 200) {
-        this.$router.push({ name: "login" });
-      }
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push({ name: "Login" });
+      }).catch(err => {
+        console.log(err);
+      });
   }
 }
 }

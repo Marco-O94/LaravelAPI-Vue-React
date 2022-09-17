@@ -28,9 +28,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    //It hides password, id and remember_token from the response
     protected $hidden = [
         'password',
         'remember_token',
+        'id'
     ];
 
     /**

@@ -57,7 +57,7 @@ export default {
     let email = this.form.email 
     let password = this.form.password
     this.$store.dispatch('login', { email, password })
-      .then(() => this.$router.push('/'))
+      .then(() => this.$router.push(this.$route.query.redirect || '/'))
       .catch(err => console.log(err))
 }
   },
