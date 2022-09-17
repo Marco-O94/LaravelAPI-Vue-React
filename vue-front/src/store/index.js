@@ -77,9 +77,11 @@ export default createStore({
           .then(resp => {
             const token = "Bearer " + resp.data.token;
             const user = resp.data.user;
-            //Passo un oggetto nel caso in cui mi serva più di un valore da salvare da server
+            //I'm committing user as Object to the store, for later use
             commit('auth_user', user, Object)
+            //I'm using cookies to store the token and user
             // Set Secure: true in cookies only when in production mode.
+            
             Cookies.setItem('token', token, { expires: 1 /* Days */, secure: false });
             Cookies.setItem('user', JSON.stringify(user), { expires: 1 /* Days */, secure: false });
             axios.defaults.headers.common['authorization'] = token
