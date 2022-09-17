@@ -1,5 +1,4 @@
-# Laravel-Api-and-JsFrameworks
-
+# LaravelApi with Vue and React
 Un progetto in cui inserirò nel tempo tutto ciò che riguarda Laravel, VueJs ed altri framework che verranno inseriti in futuro, 
 come React, tutti collegati al medesimo Laravel.
 
