@@ -32,11 +32,16 @@ Verranno in futuro inseriti anche React e Svelte.
 - [Tailwind](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 
-### RoadMap
+### TODO LIST
+Configurare le rotte per i prodotti
+Creare Dashboard
+Creare pagine CRUD prodotto
+Creare rotte private
 Aggiungere Commenti nel progetto Vue
-Configurazione [rotte private](https://router.vuejs.org/guide/advanced/navigation-guards.html#optional-third-argument-next)\
 
-`router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  else next()
-})`
+### Avvisi
+Quando il progetto va in produzione, settare i Cookies: \
+`{secure: true }`
+### RoadMap
+In Costruzione
+
