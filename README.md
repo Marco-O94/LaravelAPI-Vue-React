@@ -34,10 +34,10 @@ Verranno in futuro inseriti anche React e Svelte.
 
 ### TODO LIST
 Configurare le rotte per i prodotti
-Creare Dashboard
-Creare pagine CRUD prodotto
-Creare rotte private
-Aggiungere Commenti nel progetto Vue
+Creare Dashboard\
+Creare pagine CRUD prodotto\
+Creare rotte private\
+Aggiungere Commenti nel progetto Vue\
 
 ### Avvisi
 Quando il progetto va in produzione, settare i Cookies: \
